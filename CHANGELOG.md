@@ -39,5 +39,5 @@ A full rebuild of the original college project into a documented, tested full-st
 
 - Original Angular 10 `HttpClient` demo: a number input that fetched a user record by ID from a local backend and rendered it in a table.
 
-[1.0.0]: https://github.com/imkarthiknr/registration-form/compare/a9b92a7...v1.0.0
+[1.0.0]: https://github.com/imkarthiknr/registration-form/compare/a9b92a7...96cf03e
 [0.1.0]: https://github.com/imkarthiknr/registration-form/commit/a9b92a7
