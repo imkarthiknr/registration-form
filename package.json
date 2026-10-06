@@ -1,0 +1,25 @@
+{
+  "name": "registration-form",
+  "version": "1.0.0",
+  "description": "Full-stack user registration demo: Angular client + Express REST API.",
+  "private": true,
+  "scripts": {
+    "setup": "npm ci --prefix backend && npm ci --prefix frontend",
+    "dev": "concurrently -k -n api,web -c blue,magenta \"npm run dev --prefix backend\" \"npm start --prefix frontend\"",
+    "test": "npm test --prefix backend && npm test --prefix frontend",
+    "build": "npm run build --prefix frontend",
+    "format:check": "npm run format:check --prefix frontend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.0"
+  },
+  "engines": {
+    "node": "^20.19.0 || ^22.12.0 || >=24.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imkarthiknr/registration-form.git"
+  },
+  "author": "Karthik N R (https://github.com/imkarthiknr)",
+  "license": "MIT"
+}
