@@ -1,0 +1,23 @@
+{
+  "name": "registration-form-api",
+  "version": "1.0.0",
+  "description": "REST API for the registration-form project: register users and look them up by ID.",
+  "private": true,
+  "type": "module",
+  "main": "src/server.js",
+  "engines": {
+    "node": "^20.19.0 || ^22.12.0 || >=24.0.0"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "supertest": "^7.1.0"
+  },
+  "license": "MIT"
+}
