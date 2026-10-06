@@ -1,0 +1,101 @@
+@if (registered(); as user) {
+  <section class="card success" aria-live="polite">
+    <h2>Welcome, {{ user.name }}!</h2>
+    <p>
+      Your account was created. Your user ID is <strong>{{ user.id }}</strong
+      >.
+    </p>
+    <div class="actions">
+      <a class="button" routerLink="/lookup" [queryParams]="{ id: user.id }">View my profile</a>
+      <button type="button" class="button secondary" (click)="registerAnother()">
+        Register another user
+      </button>
+    </div>
+  </section>
+} @else {
+  <form class="card" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <h2>Create an account</h2>
+
+    <label for="name">Full name</label>
+    <input
+      id="name"
+      formControlName="name"
+      autocomplete="name"
+      [attr.aria-invalid]="showError('name')"
+    />
+    @if (showError('name')) {
+      <p class="field-error">
+        @if (form.controls.name.hasError('server')) {
+          {{ form.controls.name.getError('server') }}
+        } @else if (form.controls.name.hasError('maxlength')) {
+          Name must be at most 80 characters.
+        } @else {
+          Name is required.
+        }
+      </p>
+    }
+
+    <label for="email">Email</label>
+    <input
+      id="email"
+      type="email"
+      formControlName="email"
+      autocomplete="email"
+      [attr.aria-invalid]="showError('email')"
+    />
+    @if (showError('email')) {
+      <p class="field-error">
+        @if (form.controls.email.hasError('server')) {
+          {{ form.controls.email.getError('server') }}
+        } @else if (form.controls.email.hasError('required')) {
+          Email is required.
+        } @else {
+          Enter a valid email address.
+        }
+      </p>
+    }
+
+    <label for="password">Password</label>
+    <input
+      id="password"
+      type="password"
+      formControlName="password"
+      autocomplete="new-password"
+      [attr.aria-invalid]="showError('password')"
+    />
+    @if (showError('password')) {
+      <p class="field-error">
+        @if (form.controls.password.hasError('server')) {
+          {{ form.controls.password.getError('server') }}
+        } @else if (form.controls.password.hasError('required')) {
+          Password is required.
+        } @else if (form.controls.password.hasError('minlength')) {
+          Password must be at least {{ minLength }} characters.
+        } @else {
+          Password must contain at least one letter and one number.
+        }
+      </p>
+    } @else {
+      <p class="hint">At least {{ minLength }} characters, with a letter and a number.</p>
+    }
+
+    <label for="confirmPassword">Confirm password</label>
+    <input
+      id="confirmPassword"
+      type="password"
+      formControlName="confirmPassword"
+      autocomplete="new-password"
+    />
+    @if (form.hasError('passwordsMismatch') && form.controls.confirmPassword.touched) {
+      <p class="field-error">Passwords do not match.</p>
+    }
+
+    @if (error(); as message) {
+      <p class="form-error" role="alert">{{ message }}</p>
+    }
+
+    <button type="submit" class="button" [disabled]="submitting()">
+      {{ submitting() ? 'Registering…' : 'Register' }}
+    </button>
+  </form>
+}

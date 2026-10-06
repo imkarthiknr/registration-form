@@ -1,0 +1,37 @@
+<section class="card">
+  <h2>Find a user</h2>
+  <form class="search" (submit)="$event.preventDefault(); search()">
+    <label for="userId" class="visually-hidden">User ID</label>
+    <input
+      id="userId"
+      type="number"
+      min="1"
+      placeholder="User ID, e.g. 1"
+      [formControl]="idControl"
+      [attr.aria-invalid]="idControl.invalid && idControl.touched"
+    />
+    <button type="submit" class="button" [disabled]="loading()">
+      {{ loading() ? 'Searching…' : 'Search' }}
+    </button>
+  </form>
+  @if (idControl.invalid && idControl.touched) {
+    <p class="field-error">Enter a positive whole number.</p>
+  }
+
+  @if (error(); as message) {
+    <p class="form-error" role="alert">{{ message }}</p>
+  }
+
+  @if (user(); as u) {
+    <dl class="profile" aria-live="polite">
+      <dt>ID</dt>
+      <dd>{{ u.id }}</dd>
+      <dt>Name</dt>
+      <dd>{{ u.name }}</dd>
+      <dt>Email</dt>
+      <dd>{{ u.email }}</dd>
+      <dt>Registered</dt>
+      <dd>{{ u.createdAt | date: 'medium' }}</dd>
+    </dl>
+  }
+</section>
